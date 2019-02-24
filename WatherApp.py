@@ -30,15 +30,43 @@ if request.status_code >= 200 < 400:
     timeZone = data['data'][0]['timezone']
 #=========================================== End of Weather api
 #==============================================================
-#Aladhan API
-url = 'http://api.aladhan.com/v1/currentTimestamp?zone=Europe/London'
-request = requests.get(url)
-if request.status_code >= 200 < 400:
-    data = json.loads(request.text)
-    print(data)
+    url = 'http://api.aladhan.com/v1/currentTimestamp?zone=' + timeZone
+    request = requests.get(url)
+    if request.status_code >= 200 < 400:
+        data = json.loads(request.text)
+        timeStamp = data['data']
 
-url = 'http://api.aladhan.com/v1/timings/1398332113?latitude=51.508515&longitude=-0.1254872&method=2'
-request = requests.get(url)
-if request.status_code >= 200 < 400:
-    data = json.loads(request.text)
-    print(data)
+        url = 'http://api.aladhan.com/v1/timings/+' + timeStamp \
+              + '?latitude=' + str(lat) + '&longitude=' + str(lon) + '&method=2'
+        request = requests.get(url)
+        if request.status_code >= 200 < 400:
+            data = json.loads(request.text)
+
+            dateNum = data['data']['date']['hijri']['date']
+
+            dataStr = str(data['data']['date']['hijri']['day']) \
+                      + ' ' + str(data['data']['date']['hijri']['month']['ar']) \
+                      + ' ' + str(data['data']['date']['hijri']['year'])
+            print(dateNum)
+            print(dataStr + '\n')
+
+            fajrTime = data['data']['timings']['Fajr']
+            print('Fajr: ' + fajrTime)
+
+            sunriseTime = data['data']['timings']['Sunrise']
+            print('Sunrise: ' + sunriseTime)
+
+            dhuhrTime = data['data']['timings']['Dhuhr']
+            print('Dhuhr: ' + dhuhrTime)
+
+            asrTime = data['data']['timings']['Asr']
+            print('Asr: ' + asrTime)
+
+            sunsetTime = data['data']['timings']['Sunset']
+            print('Sunset: ' + sunsetTime)
+
+            maghribTime = data['data']['timings']['Maghrib']
+            print('Maghrib: ' + maghribTime)
+
+            ishaTime = data['data']['timings']['Isha']
+            print('Isha: ' + ishaTime)
