@@ -1,4 +1,3 @@
-# Weather API
 import requests # pip install requests
 import json # pip install simplejson
 user_location = 'London,UK'
@@ -30,3 +29,16 @@ if request.status_code >= 200 < 400:
     lon = data['data'][0]['lon']
     timeZone = data['data'][0]['timezone']
 #=========================================== End of Weather api
+#==============================================================
+#Aladhan API
+url = 'http://api.aladhan.com/v1/currentTimestamp?zone=Europe/London'
+request = requests.get(url)
+if request.status_code >= 200 < 400:
+    data = json.loads(request.text)
+    print(data)
+
+url = 'http://api.aladhan.com/v1/timings/1398332113?latitude=51.508515&longitude=-0.1254872&method=2'
+request = requests.get(url)
+if request.status_code >= 200 < 400:
+    data = json.loads(request.text)
+    print(data)
