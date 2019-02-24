@@ -70,3 +70,11 @@ if request.status_code >= 200 < 400:
 
             ishaTime = data['data']['timings']['Isha']
             print('Isha: ' + ishaTime)
+
+            url = 'http://api.aladhan.com/v1/currentTime?zone=' + timeZone
+            request = requests.get(url)
+            if request.status_code >= 200 < 400:
+                data = json.loads(request.text)
+
+                time = data['data']
+                print('\n\nTime Now: ' + time)
