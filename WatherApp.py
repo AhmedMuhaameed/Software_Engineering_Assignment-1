@@ -78,3 +78,16 @@ if request.status_code >= 200 < 400:
 
                 time = data['data']
                 print('\n\nTime Now: ' + time)
+#===========================================================================End of aladhan api
+#==============================================================================================
+                #Facebook API
+                token = 'EAAG9U3KJEmMBABkL4ZAEKgXa0ebFI7jY0w1zi08Uq1lBtlvzs8ymPe6ZADDZAUNkxnCWa3g6x3FACY3nwe' \
+                        'J4blbSQ5vDBUV80X8aJSWyADBqwO75LU6xY4adM4oAXagBLNxja6uCmQhvNmrtbOgWxcRBbfMsCak77ywEF' \
+                        'cEktnF0RJW9RZAx'
+                try:
+                    fb = facebook.GraphAPI(access_token=token)
+                    fb.put_object(parent_object='me', connection_name='feed', message='test')
+                except:
+                    print('your app Status: Live, so you can\'t post\n'
+                          'go to facebook developer then go to your app and make it status : In Development\n'
+                          'and make sure you have a correct Access token and page on facebook connected with app')
